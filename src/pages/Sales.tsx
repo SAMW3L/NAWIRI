@@ -155,7 +155,7 @@ export function Sales() {
     },
     {
       header: 'Total Amount',
-      accessor: (sale: Sale) => `KES ${sale.total_amount.toLocaleString()}`,
+      accessor: (sale: Sale) => `Tsh ${sale.total_amount.toLocaleString()}`,
     },
     {
       header: 'Payment Status',
@@ -164,7 +164,7 @@ export function Sales() {
     },
     {
       header: 'Paid Amount',
-      accessor: (sale: Sale) => `KES ${sale.paid_amount.toLocaleString()}`,
+      accessor: (sale: Sale) => `Tsh ${sale.paid_amount.toLocaleString()}`,
     },
     {
       header: 'Date',

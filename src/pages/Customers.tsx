@@ -75,12 +75,12 @@ export function Customers() {
     {
       header: 'Total Purchases',
       accessor: (customer: Customer) =>
-        `KES ${customer.total_purchases.toLocaleString()}`,
+        `Tsh ${customer.total_purchases.toLocaleString()}`,
     },
     {
       header: 'Outstanding Balance',
       accessor: (customer: Customer) =>
-        `KES ${customer.outstanding_balance.toLocaleString()}`,
+        `Tsh ${customer.outstanding_balance.toLocaleString()}`,
     },
     {
       header: 'Actions',

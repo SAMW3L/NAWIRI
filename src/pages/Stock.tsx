@@ -76,14 +76,14 @@ export function Stock() {
       header: 'Unit Price',
       accessor: (transaction: StockTransaction) =>
         transaction.unit_price
-          ? `KES ${transaction.unit_price.toLocaleString()}`
+          ? `Tsh ${transaction.unit_price.toLocaleString()}`
           : 'N/A',
     },
     {
       header: 'Total Value',
       accessor: (transaction: StockTransaction) =>
         transaction.unit_price
-          ? `KES ${(transaction.quantity * transaction.unit_price).toLocaleString()}`
+          ? `Tsh ${(transaction.quantity * transaction.unit_price).toLocaleString()}`
           : 'N/A',
     },
     { header: 'Notes', accessor: 'notes' },

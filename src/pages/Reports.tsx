@@ -39,9 +39,9 @@ export function Reports() {
           .map((sale) => ({
             Date: format(new Date(sale.created_at), 'dd/MM/yyyy'),
             'Invoice No': sale.id.slice(0, 8),
-            Amount: `KES ${sale.total_amount.toLocaleString()}`,
+            Amount: `Tsh ${sale.total_amount.toLocaleString()}`,
             Status: sale.payment_status,
-            'Paid Amount': `KES ${sale.paid_amount.toLocaleString()}`,
+            'Paid Amount': `Tsh ${sale.paid_amount.toLocaleString()}`,
           }));
 
       case 'lowStock':
@@ -101,9 +101,9 @@ export function Reports() {
 
         return Object.entries(performanceData).map(([employee, data]) => ({
           Employee: employee,
-          'Total Sales': `KES ${data.totalSales.toLocaleString()}`,
+          'Total Sales': `Tsh ${data.totalSales.toLocaleString()}`,
           Transactions: data.transactions,
-          'Average Sale Value': `KES ${data.averageValue.toLocaleString()}`,
+          'Average Sale Value': `Tsh ${data.averageValue.toLocaleString()}`,
         }));
 
       default:

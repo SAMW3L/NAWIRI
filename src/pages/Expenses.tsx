@@ -78,7 +78,7 @@ export function Expenses() {
     },
     {
       header: 'Amount',
-      accessor: (expense: Expense) => `KES ${expense.amount.toLocaleString()}`,
+      accessor: (expense: Expense) => `Tsh ${expense.amount.toLocaleString()}`,
     },
     { header: 'Description', accessor: 'description' },
     { header: 'Date', accessor: 'date' },

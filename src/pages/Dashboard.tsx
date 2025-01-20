@@ -70,19 +70,19 @@ export function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card
           title="Total Sales"
-          value={`KES ${totalSales.toLocaleString()}`}
+          value={`Tsh ${totalSales.toLocaleString()}`}
           icon={<ShoppingCart />}
           trend={{ value: 12, label: 'vs last month' }}
         />
         <Card
           title="Total Expenses"
-          value={`KES ${totalExpenses.toLocaleString()}`}
+          value={`Tsh ${totalExpenses.toLocaleString()}`}
           icon={<DollarSign />}
           trend={{ value: -5, label: 'vs last month' }}
         />
         <Card
           title="Net Profit"
-          value={`KES ${profit.toLocaleString()}`}
+          value={`Tsh ${profit.toLocaleString()}`}
           icon={<TrendingUp />}
           trend={{ value: 8, label: 'vs last month' }}
         />

@@ -93,10 +93,10 @@ export function SaleReceipt({ sale, onClose }: SaleReceiptProps) {
                   <td className="py-2">{product?.name}</td>
                   <td className="py-2 text-right">{item.quantity}</td>
                   <td className="py-2 text-right">
-                    KES {item.unit_price.toLocaleString()}
+                    Tsh {item.unit_price.toLocaleString()}
                   </td>
                   <td className="py-2 text-right">
-                    KES {item.total_price.toLocaleString()}
+                    Tsh {item.total_price.toLocaleString()}
                   </td>
                 </tr>
               );
@@ -108,7 +108,7 @@ export function SaleReceipt({ sale, onClose }: SaleReceiptProps) {
                 Total:
               </td>
               <td className="py-2 text-right font-semibold">
-                KES {sale.total_amount.toLocaleString()}
+                Tsh {sale.total_amount.toLocaleString()}
               </td>
             </tr>
             <tr className="text-sm">
@@ -116,7 +116,7 @@ export function SaleReceipt({ sale, onClose }: SaleReceiptProps) {
                 Paid:
               </td>
               <td className="py-2 text-right">
-                KES {sale.paid_amount.toLocaleString()}
+                Tsh {sale.paid_amount.toLocaleString()}
               </td>
             </tr>
             <tr className="text-sm">
@@ -124,7 +124,7 @@ export function SaleReceipt({ sale, onClose }: SaleReceiptProps) {
                 Balance:
               </td>
               <td className="py-2 text-right">
-                KES {(sale.total_amount - sale.paid_amount).toLocaleString()}
+                Tsh {(sale.total_amount - sale.paid_amount).toLocaleString()}
               </td>
             </tr>
           </tfoot>

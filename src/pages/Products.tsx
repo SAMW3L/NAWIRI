@@ -109,7 +109,7 @@ export function Products() {
     },
     {
       header: 'Price',
-      accessor: (product: Product) => `KES ${product.price.toLocaleString()}`,
+      accessor: (product: Product) => `Tsh ${product.price.toLocaleString()}`,
     },
     { header: 'Stock', accessor: 'stock_quantity' },
     { header: 'Reorder Level', accessor: 'reorder_level' },
