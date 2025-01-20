@@ -5,7 +5,8 @@ import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
 import { Input } from '../components/Input';
 import { Select } from '../components/Select';
-import { Plus, Edit2, Trash2 } from 'lucide-react';
+import { Plus, Edit2, Trash2, Receipt } from 'lucide-react';
+import { SaleReceipt } from '../components/SaleReceipt';
 import type { Sale, SaleItem, PaymentStatus } from '../types/database';
 
 const paymentStatuses = [
@@ -26,6 +27,7 @@ export function Sales() {
   } = useStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSale, setSelectedSale] = useState<Sale | null>(null);
+  const [showReceipt, setShowReceipt] = useState(false);
   const [formData, setFormData] = useState({
     customer_id: '',
     total_amount: 0,
@@ -215,8 +217,31 @@ export function Sales() {
         </Button>
       </div>
 
-      <DataTable data={sales} columns={columns} />
+      <DataTable
+        data={sales}
+        columns={[
+          ...columns,
+          {
+            header: 'Receipt',
+            accessor: (sale: Sale) => (
+              <Button
+                variant="secondary"
+                size="sm"
+                icon={<Receipt className="h-4 w-4" />}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedSale(sale);
+                  setShowReceipt(true);
+                }}
+              >
+                View
+              </Button>
+            ),
+          },
+        ]}
+      />
 
+      {/* Regular Sale Modal */}
       <Modal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
@@ -358,6 +383,20 @@ export function Sales() {
             </Button>
           </div>
         </form>
+      </Modal>
+
+      {/* Receipt Modal */}
+      <Modal
+        isOpen={showReceipt}
+        onClose={() => setShowReceipt(false)}
+        title="Sale Receipt"
+      >
+        {selectedSale && (
+          <SaleReceipt
+            sale={selectedSale}
+            onClose={() => setShowReceipt(false)}
+          />
+        )}
       </Modal>
     </div>
   );

@@ -5,7 +5,8 @@ import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
 import { Input } from '../components/Input';
 import { Select } from '../components/Select';
-import { Plus } from 'lucide-react';
+import { Plus, Upload } from 'lucide-react';
+import { BulkUploadModal } from '../components/BulkUploadModal';
 import type { StockTransaction, TransactionType } from '../types/database';
 
 const transactionTypes = [
@@ -17,13 +18,14 @@ const transactionTypes = [
 export function Stock() {
   const { products, stockTransactions, addStockTransaction } = useStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isBulkUploadOpen, setIsBulkUploadOpen] = useState(false);
   const [formData, setFormData] = useState({
     product_id: '',
     transaction_type: 'stock_in' as TransactionType,
     quantity: 0,
     unit_price: 0,
     notes: '',
-    created_by: 'system', // In a real app, this would be the logged-in user's ID
+    created_by: 'system',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -41,6 +43,19 @@ export function Stock() {
       unit_price: 0,
       notes: '',
       created_by: 'system',
+    });
+  };
+
+  const handleBulkUpload = (data: any[]) => {
+    data.forEach((item) => {
+      const product = products.find((p) => p.name === item.product_name);
+      if (product) {
+        addStockTransaction({
+          ...item,
+          product_id: product.id,
+          created_by: 'system',
+        });
+      }
     });
   };
 
@@ -83,13 +98,22 @@ export function Stock() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold text-gray-900">Stock Transactions</h1>
-        <Button
-          variant="primary"
-          icon={<Plus className="h-5 w-5" />}
-          onClick={() => setIsModalOpen(true)}
-        >
-          New Transaction
-        </Button>
+        <div className="flex space-x-3">
+          <Button
+            variant="secondary"
+            icon={<Upload className="h-5 w-5" />}
+            onClick={() => setIsBulkUploadOpen(true)}
+          >
+            Bulk Upload
+          </Button>
+          <Button
+            variant="primary"
+            icon={<Plus className="h-5 w-5" />}
+            onClick={() => setIsModalOpen(true)}
+          >
+            New Transaction
+          </Button>
+        </div>
       </div>
 
       <DataTable data={stockTransactions} columns={columns} />
@@ -162,6 +186,13 @@ export function Stock() {
           </div>
         </form>
       </Modal>
+
+      <BulkUploadModal
+        isOpen={isBulkUploadOpen}
+        onClose={() => setIsBulkUploadOpen(false)}
+        onUpload={handleBulkUpload}
+        type="stock"
+      />
     </div>
   );
 }

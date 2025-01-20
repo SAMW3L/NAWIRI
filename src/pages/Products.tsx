@@ -5,7 +5,8 @@ import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
 import { Input } from '../components/Input';
 import { Select } from '../components/Select';
-import { Plus, Edit2, Trash2 } from 'lucide-react';
+import { Plus, Edit2, Trash2, Upload } from 'lucide-react';
+import { BulkUploadModal } from '../components/BulkUploadModal';
 import type { Product, ProductCategory, WeightCategory } from '../types/database';
 
 const productCategories = [
@@ -23,6 +24,7 @@ const weightCategories = [
 export function Products() {
   const { products, addProduct, updateProduct, deleteProduct } = useStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isBulkUploadOpen, setIsBulkUploadOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -85,6 +87,12 @@ export function Products() {
     });
   };
 
+  const handleBulkUpload = (data: any[]) => {
+    data.forEach((item) => {
+      addProduct(item);
+    });
+  };
+
   const columns = [
     { header: 'Name', accessor: 'name' },
     {
@@ -142,13 +150,22 @@ export function Products() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold text-gray-900">Products</h1>
-        <Button
-          variant="primary"
-          icon={<Plus className="h-5 w-5" />}
-          onClick={() => handleOpenModal()}
-        >
-          Add Product
-        </Button>
+        <div className="flex space-x-3">
+          <Button
+            variant="secondary"
+            icon={<Upload className="h-5 w-5" />}
+            onClick={() => setIsBulkUploadOpen(true)}
+          >
+            Bulk Upload
+          </Button>
+          <Button
+            variant="primary"
+            icon={<Plus className="h-5 w-5" />}
+            onClick={() => handleOpenModal()}
+          >
+            Add Product
+          </Button>
+        </div>
       </div>
 
       <DataTable data={products} columns={columns} />
@@ -236,6 +253,13 @@ export function Products() {
           </div>
         </form>
       </Modal>
+
+      <BulkUploadModal
+        isOpen={isBulkUploadOpen}
+        onClose={() => setIsBulkUploadOpen(false)}
+        onUpload={handleBulkUpload}
+        type="products"
+      />
     </div>
   );
 }

@@ -7,6 +7,7 @@ import {
   ClipboardList,
   DollarSign,
   ShoppingCart,
+  FileText,
   LogOut,
 } from 'lucide-react';
 
@@ -17,6 +18,7 @@ const navItems = [
   { path: '/stock', icon: ClipboardList, label: 'Stock' },
   { path: '/expenses', icon: DollarSign, label: 'Expenses' },
   { path: '/sales', icon: ShoppingCart, label: 'Sales' },
+  { path: '/reports', icon: FileText, label: 'Reports' },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
